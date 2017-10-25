@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import api from '../utils/api'
 import { storeDecks } from '../actions'
 import {
+  FlatList,
   StyleSheet,
   Text,
   View
@@ -11,8 +12,8 @@ import {
 function Card ({ title, number }) {
   return (
     <View style={styles.card}>
-      <Text>{title}</Text>
-      <Text>{number}</Text>
+      <Text style={[styles.center, styles.white]}>{title}</Text>
+      <Text style={[styles.center, styles.gray]}>{number} cards</Text>
     </View>
   )
 }
@@ -24,26 +25,34 @@ class DecksView extends Component {
   }
 
   render () {
-    const { decks } = this.props
-
     return (
-      <View>
-        <Text>Decks!</Text>
-        {decks && decks.map(
-          ({title, questions}) => <Card key={title} title={title} number={questions.length} />
-        )}
-      </View>
+      <FlatList
+        data={this.props.decks}
+        renderItem={({ item }) => <Card title={item.title} number={item.questions.length} />}
+        keyExtractor={deck => deck.title}
+      />
     )
   }
 }
 
 const styles = StyleSheet.create({
   card: {
+    padding: 20,
+    margin: 10,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#d6d7da',
-    margin: 10,
+    borderColor: 'dodgerblue',
+    backgroundColor: 'cornflowerblue',
     justifyContent: 'center'
+  },
+  center: {
+    alignSelf: 'center'
+  },
+  white: {
+    color: 'white'
+  },
+  gray: {
+    color: 'lightgray'
   }
 })
 
