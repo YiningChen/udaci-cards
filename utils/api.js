@@ -51,8 +51,8 @@ function getDecks () {
 }
 
 function getDeck (id) {
-  return AsyncStorage.getItem(DECK_STORAGE_KEY)
-    .then(dataString => JSON.parse(dataString))
+  return getDecksFromStorage()
+    .then(data => data && data[id])
 }
 
 function saveDeckTitle (title) {
