@@ -8,7 +8,7 @@ import api from '../utils/api'
 import StyledTextInput from './StyledTextInput'
 import TextButton from './TextButton'
 
-class DecksNew extends Component {
+class AddDeck extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -38,7 +38,7 @@ class DecksNew extends Component {
       .then(api.getDecks)
       .then(data => dispatch(storeDecks(data)))
       .then(() => this.setState({ deckTitle: '' }))
-      .then(() => navigation.navigate('DecksView'))
+      .then(() => navigation.navigate('ViewDecks'))
       .catch(invalidTitle => alert(invalidTitle))
   }
 
@@ -56,4 +56,4 @@ class DecksNew extends Component {
   }
 }
 
-export default connect()(DecksNew)
+export default connect()(AddDeck)

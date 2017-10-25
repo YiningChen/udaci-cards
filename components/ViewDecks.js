@@ -23,7 +23,7 @@ function Card ({ title, number, onPress }) {
   )
 }
 
-class DecksView extends Component {
+class ViewDecks extends Component {
   componentWillMount () {
     api.getDecks()
       .then(data => this.props.dispatch(storeDecks(data)))
@@ -82,4 +82,4 @@ function mapStateToProps ({ currentDeck, decks }) {
   return { currentDeck, decks }
 }
 
-export default connect(mapStateToProps)(DecksView)
+export default connect(mapStateToProps)(ViewDecks)

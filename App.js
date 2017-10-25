@@ -6,20 +6,20 @@ import { TabNavigator, StackNavigator } from 'react-navigation'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import reducers from './reducers'
-import DecksView from './components/DecksView'
-import DecksNew from './components/DecksNew'
+import ViewDecks from './components/ViewDecks'
+import AddDeck from './components/AddDeck'
 import DeckView from './components/DeckView'
 
 const Tabs = TabNavigator({
-  DecksView: {
-    screen: DecksView,
+  ViewDecks: {
+    screen: ViewDecks,
     navigationOptions: {
       tabBarLabel: 'Decks',
       tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name='cards' size={30} color={tintColor} />
     }
   },
-  DecksNew: {
-    screen: DecksNew,
+  AddDeck: {
+    screen: AddDeck,
     navigationOptions: {
       tabBarLabel: 'New Deck',
       tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name='library-plus' size={30} color={tintColor} />
