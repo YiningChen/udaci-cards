@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import api from '../utils/api'
+import { storeDecks } from '../actions'
 import {
   StyleSheet,
   Text,
@@ -14,12 +17,21 @@ function Card ({ title, number }) {
   )
 }
 
-export default class DecksView extends Component {
+class DecksView extends Component {
+  componentWillMount () {
+    api.getDecks()
+      .then(data => this.props.dispatch(storeDecks(data)))
+  }
+
   render () {
+    const { decks } = this.props
+
     return (
       <View>
         <Text>Decks!</Text>
-        <Card title='testing' number='0' />
+        {decks && decks.map(
+          ({title, questions}) => <Card key={title} title={title} number={questions.length} />
+        )}
       </View>
     )
   }
@@ -34,3 +46,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 })
+
+function mapStateToProps ({ decks }) {
+  return { decks }
+}
+
+export default connect(mapStateToProps)(DecksView)

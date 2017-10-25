@@ -1,7 +1,11 @@
 import React from 'react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import { StyleSheet, Text, View } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+
+import reducers from './reducers'
 import DecksView from './components/DecksView'
 import DecksNew from './components/DecksNew'
 
@@ -25,7 +29,9 @@ const Tabs = TabNavigator({
 export default class App extends React.Component {
   render () {
     return (
+      <Provider store={createStore(reducers)}>
         <Tabs />
+      </Provider>
     )
   }
 }
