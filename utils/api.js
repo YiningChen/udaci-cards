@@ -27,13 +27,21 @@ const DUMMY_DATA = {
   }
 }
 
+function deleteALlData () {
+  return AsyncStorage.clear()
+}
+
 function setDummyData () {
   return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(DUMMY_DATA))
 }
 
-function getDecksAsArray () {
+function getDecksFromStorage () {
   return AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then(dataString => JSON.parse(dataString))
+}
+
+function getDecksAsArray () {
+  return getDecksFromStorage()
     .then(data => data && Object.values(data))
 }
 
@@ -48,13 +56,19 @@ function getDeck (id) {
 }
 
 function saveDeckTitle (title) {
+  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
+    [title]: {
+      title,
+      questions: []
+    }
+  }))
 }
 
 function addCardToDeck (title, card) {
 }
 
 export default {
-  setDummyData,
+  deleteALlData,
   getDecks,
   getDeck,
   saveDeckTitle,
