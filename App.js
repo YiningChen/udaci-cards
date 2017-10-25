@@ -1,15 +1,32 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import { TabNavigator, StackNavigator } from 'react-navigation'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import DecksView from './components/DecksView'
+import DecksNew from './components/DecksNew'
+
+const Tabs = TabNavigator({
+  DecksView: {
+    screen: DecksView,
+    navigationOptions: {
+      tabBarLabel: 'Decks',
+      tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name='cards' size={30} color={tintColor} />
+    }
+  },
+  DecksNew: {
+    screen: DecksNew,
+    navigationOptions: {
+      tabBarLabel: 'New Deck',
+      tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name='library-plus' size={30} color={tintColor} />
+    }
+  }
+})
 
 export default class App extends React.Component {
-  render() {
+  render () {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
+        <Tabs />
+    )
   }
 }
 
@@ -18,6 +35,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    justifyContent: 'center'
+  }
+})
