@@ -10,6 +10,7 @@ import {
 
 import api from '../utils/api'
 import { setCurrentDeck, storeDecks } from '../actions'
+import TextButton from './TextButton'
 
 function Card ({ title, number, onPress }) {
   return (
@@ -38,6 +39,7 @@ class DecksView extends Component {
   render () {
     return (
       <View>
+        <TextButton text='clear storage' onPress={() => api.deleteAllData()} />
         <FlatList
           data={this.props.decks}
           renderItem={

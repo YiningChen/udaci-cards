@@ -27,7 +27,7 @@ const DUMMY_DATA = {
   }
 }
 
-function deleteALlData () {
+function deleteAllData () {
   return AsyncStorage.clear()
 }
 
@@ -68,7 +68,7 @@ function addCardToDeck (title, card) {
 }
 
 export default {
-  deleteALlData,
+  deleteAllData,
   getDecks,
   getDeck,
   saveDeckTitle,
