@@ -1,10 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableHighlight } from 'react-native'
 
-export default function TextButton ({ text, styleOverrides, ...props }) {
+export default function TextButton ({ text, styleOverrides, underlayColor, ...props }) {
   const buttonStyles = [styles.button, styleOverrides]
   return (
-    <TouchableHighlight style={buttonStyles} {...props}>
+    <TouchableHighlight
+      style={buttonStyles}
+      underlayColor={underlayColor || 'dodgerblue'}
+      {...props}
+    >
       <Text style={styles.whiteText}>{text}</Text>
     </TouchableHighlight>
   )
