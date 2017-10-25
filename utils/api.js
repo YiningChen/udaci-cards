@@ -34,12 +34,12 @@ function setDummyData () {
 function getDecksAsArray () {
   return AsyncStorage.getItem(DECK_STORAGE_KEY)
     .then(dataString => JSON.parse(dataString))
-    .then(data => Object.values(data))
+    .then(data => data && Object.values(data))
 }
 
 function getDecks () {
   return getDecksAsArray()
-    .then(data => (data.length > 0) ? data : setDummyData().then(getDecksAsArray))
+    .then(data => (data && data.length > 0) ? data : setDummyData().then(getDecksAsArray))
 }
 
 function getDeck (id) {
