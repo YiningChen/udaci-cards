@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import api from '../utils/api'
-import { storeDecks } from '../actions'
 import {
   FlatList,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View
 } from 'react-native'
 
-function Card ({ title, number }) {
+import api from '../utils/api'
+import { setCurrentDeck, storeDecks } from '../actions'
+
+function Card ({ title, number, onPress }) {
   return (
-    <View style={styles.card}>
-      <Text style={[styles.center, styles.white]}>{title}</Text>
-      <Text style={[styles.center, styles.gray]}>{number} cards</Text>
-    </View>
+    <TouchableHighlight style={styles.card} underlayColor='dodgerblue' onPress={onPress}>
+      <View>
+        <Text style={[styles.center, styles.white]}>{title}</Text>
+        <Text style={[styles.center, styles.gray]}>{number} cards</Text>
+      </View>
+    </TouchableHighlight>
   )
 }
 
@@ -24,13 +28,29 @@ class DecksView extends Component {
       .then(data => this.props.dispatch(storeDecks(data)))
   }
 
+  onCardPress (title) {
+    const { dispatch, navigation } = this.props
+    api.getDeck(title)
+      .then(data => dispatch(setCurrentDeck(data)))
+      .then(() => navigation.navigate('DeckView', { title }))
+  }
+
   render () {
     return (
-      <FlatList
-        data={this.props.decks}
-        renderItem={({ item }) => <Card title={item.title} number={item.questions.length} />}
-        keyExtractor={deck => deck.title}
-      />
+      <View>
+        <FlatList
+          data={this.props.decks}
+          renderItem={
+            ({ item }) =>
+              <Card
+                title={item.title}
+                number={item.questions.length}
+                onPress={() => this.onCardPress(item.title)}
+              />
+          }
+          keyExtractor={deck => deck.title}
+        />
+      </View>
     )
   }
 }
@@ -56,8 +76,8 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps ({ decks }) {
-  return { decks }
+function mapStateToProps ({ currentDeck, decks }) {
+  return { currentDeck, decks }
 }
 
 export default connect(mapStateToProps)(DecksView)

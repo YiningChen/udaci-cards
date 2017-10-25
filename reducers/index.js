@@ -1,5 +1,14 @@
 import { combineReducers } from 'redux'
-import { STORE_DECKS } from '../actions'
+import { STORE_DECKS, SET_CURRENT_DECK } from '../actions'
+
+function currentDeck (state = {}, action) {
+  switch (action.type) {
+    case SET_CURRENT_DECK:
+      return action.deck
+    default:
+      return state
+  }
+}
 
 function decks (state = [], action) {
   switch (action.type) {
@@ -11,5 +20,6 @@ function decks (state = [], action) {
 }
 
 export default combineReducers({
+  currentDeck,
   decks
 })

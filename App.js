@@ -8,6 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import reducers from './reducers'
 import DecksView from './components/DecksView'
 import DecksNew from './components/DecksNew'
+import DeckView from './components/DeckView'
 
 const Tabs = TabNavigator({
   DecksView: {
@@ -26,11 +27,23 @@ const Tabs = TabNavigator({
   }
 })
 
+const MainNavigator = StackNavigator({
+  Decks: {
+    screen: Tabs,
+    navigationOptions: {
+      title: 'Decks'
+    }
+  },
+  DeckView: {
+    screen: DeckView
+  }
+})
+
 export default class App extends React.Component {
   render () {
     return (
       <Provider store={createStore(reducers)}>
-        <Tabs />
+        <MainNavigator />
       </Provider>
     )
   }
