@@ -9,6 +9,7 @@ import reducers from './reducers'
 import ViewDecks from './components/ViewDecks'
 import AddDeck from './components/AddDeck'
 import DeckView from './components/DeckView'
+import AddCard from './components/AddCard'
 
 const Tabs = TabNavigator({
   ViewDecks: {
@@ -36,6 +37,12 @@ const MainNavigator = StackNavigator({
   },
   DeckView: {
     screen: DeckView
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      title: 'Add Card'
+    }
   }
 })
 

@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
   }
 })
 
-function mapStateToProps ({ currentDeck, decks }) {
-  return { currentDeck, decks }
+function mapStateToProps ({ decks }) {
+  return { decks }
 }
 
 export default connect(mapStateToProps)(ViewDecks)

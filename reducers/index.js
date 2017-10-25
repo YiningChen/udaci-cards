@@ -11,9 +11,14 @@ function currentDeck (state = {}, action) {
 }
 
 function decks (state = [], action) {
+  const newState = state.slice()
+
   switch (action.type) {
     case STORE_DECKS:
       return action.decks
+    case SET_CURRENT_DECK:
+      newState[action.deck.title] = action.deck
+      return newState
     default:
       return state
   }
