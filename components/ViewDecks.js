@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
+  Animated,
   FlatList,
   StyleSheet,
   Text,
@@ -24,21 +25,48 @@ function Card ({ title, number, onPress }) {
 }
 
 class ViewDecks extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      opacity: new Animated.Value(1)
+    }
+  }
+
   componentWillMount () {
     api.getDecks()
       .then(data => this.props.dispatch(storeDecks(data)))
   }
 
+  componentWillUpdate () {
+    api.getDecks()
+      .then(data => this.props.dispatch(storeDecks(data)))
+      .then(this.animateIn())
+  }
+
+  animateIn () {
+    const { opacity } = this.state
+    Animated.timing(opacity, { toValue: 1, duration: 500 })
+      .start()
+  }
+
+  animateOut () {
+    const { opacity } = this.state
+    Animated.timing(opacity, { toValue: 0, duration: 500 })
+      .start()
+  }
+
   onCardPress (title) {
     const { dispatch, navigation } = this.props
+    this.animateOut()
     api.getDeck(title)
       .then(data => dispatch(setCurrentDeck(data)))
       .then(() => navigation.navigate('DeckView', { title }))
   }
 
   render () {
+    const { opacity } = this.state
     return (
-      <View>
+      <Animated.View style={{ opacity }}>
         <FlatList
           data={this.props.decks}
           renderItem={
@@ -51,7 +79,7 @@ class ViewDecks extends Component {
           }
           keyExtractor={deck => deck.title}
         />
-      </View>
+      </Animated.View>
     )
   }
 }
