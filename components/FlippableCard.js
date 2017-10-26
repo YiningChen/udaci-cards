@@ -3,6 +3,8 @@ import { Animated, StyleSheet, Text, View } from 'react-native'
 import sharedStyles from '../utils/sharedStyles'
 import TextButton from './TextButton'
 
+// flipping take from this:
+// https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
 export default class FlippableCard extends Component {
   componentWillMount () {
     this.animatedValue = new Animated.Value(0)
