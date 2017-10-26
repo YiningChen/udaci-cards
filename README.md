@@ -3,4 +3,5 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 * `npm install` to install the project
 * `npm start` to run the project
 * This project was tested on iOS simulator and phone
+* Developed using node v6.10
 
