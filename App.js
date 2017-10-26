@@ -1,11 +1,11 @@
 import React from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { StyleSheet, Text, View } from 'react-native'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import reducers from './reducers'
+import api from './utils/api'
 import ViewDecks from './components/ViewDecks'
 import AddDeck from './components/AddDeck'
 import DeckView from './components/DeckView'
@@ -54,6 +54,10 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+  componentDidMount () {
+    api.setLocalNotification()
+  }
+
   render () {
     return (
       <Provider store={createStore(reducers)}>
@@ -62,12 +66,3 @@ export default class App extends React.Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})

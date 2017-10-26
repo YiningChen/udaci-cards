@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import api from '../utils/api'
 import sharedStyles from '../utils/sharedStyles'
@@ -40,6 +40,11 @@ class QuizView extends Component {
     this.state = DEFAULT_STATE
   }
 
+  resetNotification () {
+    api.clearLocalNotification()
+      .then(api.setLocalNotification())
+  }
+
   incrementIndex (currentDeck, correct) {
     const length = currentDeck ? currentDeck.questions.length : 0
 
@@ -49,6 +54,7 @@ class QuizView extends Component {
       if (index < length - 1) {
         index = prevState.index + 1
       } else {
+        this.resetNotification()
         quizMode = false
       }
 
