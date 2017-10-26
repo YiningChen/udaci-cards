@@ -8,13 +8,14 @@ import {
   View
 } from 'react-native'
 
+import sharedStyles from '../utils/sharedStyles'
 import api from '../utils/api'
 import { setCurrentDeck, storeDecks } from '../actions'
 import TextButton from './TextButton'
 
 function Card ({ title, number, onPress }) {
   return (
-    <TouchableHighlight style={styles.card} underlayColor='dodgerblue' onPress={onPress}>
+    <TouchableHighlight style={sharedStyles.card} underlayColor='dodgerblue' onPress={onPress}>
       <View>
         <Text style={[styles.center, styles.white]}>{title}</Text>
         <Text style={[styles.center, styles.gray]}>{number} cards</Text>
@@ -58,15 +59,6 @@ class ViewDecks extends Component {
 }
 
 const styles = StyleSheet.create({
-  card: {
-    padding: 20,
-    margin: 10,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: 'dodgerblue',
-    backgroundColor: 'cornflowerblue',
-    justifyContent: 'center'
-  },
   center: {
     alignSelf: 'center'
   },

@@ -20,7 +20,7 @@ class DeckView extends Component {
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subText}>{questions.length} cards</Text>
         <TextButton text='Add Card' onPress={() => navigate('AddCard')} />
-        <TextButton text='Start Quiz' />
+        <TextButton text='Start Quiz' onPress={() => navigate('QuizView')} />
       </View>
     )
   }

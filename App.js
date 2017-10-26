@@ -10,6 +10,7 @@ import ViewDecks from './components/ViewDecks'
 import AddDeck from './components/AddDeck'
 import DeckView from './components/DeckView'
 import AddCard from './components/AddCard'
+import QuizView from './components/QuizView'
 
 const Tabs = TabNavigator({
   ViewDecks: {
@@ -42,6 +43,12 @@ const MainNavigator = StackNavigator({
     screen: AddCard,
     navigationOptions: {
       title: 'Add Card'
+    }
+  },
+  QuizView: {
+    screen: QuizView,
+    navigationOptions: {
+      title: 'Quiz!'
     }
   }
 })
