@@ -37,10 +37,6 @@ class AddCard extends Component {
 
     api.addCardToDeck(title, { question, answer })
       .then(() => api.getDeck(title))
-      .then(data => {
-        console.log(data)
-        return data
-      })
       .then(data => dispatch(setCurrentDeck(data)))
       .then(() => this.setState({ question: '', answer: '' }))
       .then(() => navigation.goBack())
